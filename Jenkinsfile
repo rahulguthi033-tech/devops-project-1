@@ -22,7 +22,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'scp target/*.war user@slave-server:/opt/tomcat/webapps/'
+                sh 'cp target/*.war /opt/tomcat11/webapps/'
             }
         }
     }
