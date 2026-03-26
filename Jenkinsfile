@@ -2,8 +2,7 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Clone Code') {
+        stage('Clone') {
             steps {
                 git 'https://github.com/rahulguthi033-tech/devops-project-1.git'
             }
@@ -11,7 +10,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean compile'
+                sh 'mvn clean package'
             }
         }
 
@@ -23,8 +22,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'mvn package -DskipTests'
-                sh 'cp target/mavenproject.war /opt/tomcat/webapps/'
+                sh 'scp target/*.war user@slave-server:/opt/tomcat/webapps/'
             }
         }
     }
